@@ -3,7 +3,7 @@ import java.util.List;
 import edificio.*;
 import ventana.Ventana;
 public class FelixJr {
-private int vida;
+private int vida;//a
 private int puntaje;
 private int tiempoInmunidad;
 private boolean inmunidad;
