@@ -5,10 +5,13 @@ private int movimientos; //variable que cuenta la cantantidad de movimientos que
 private Sentido sentido;
 private Posicion posicion;
 private final int maximoX=16;
-public Pajaro(Posicion p) {
-	posicion=new Posicion(p.getPosicionX(),p.getPosicionY());
+private final int cantLlamados=10;
+private Contador contadorMover;
+public Pajaro(int posicionX,int posicionY) {
+	posicion=new Posicion(posicionX,posicionY);
 	movimientos=0;
 	sentido=Sentido.MOVERDERECHA;
+	contadorMover=new Contador(cantLlamados);
 }
 public Posicion getPosicion() {
 	return posicion;
@@ -17,6 +20,7 @@ public void setPosicion(Posicion posicion) {
 	this.posicion = posicion;
 }
 public void mover() {
+	if(contadorMover.aumentarContador()) {
 if(movimientos==maximoX) {
 	movimientos=0;
 	if(sentido==Sentido.MOVERDERECHA) {
@@ -28,6 +32,7 @@ if(movimientos==maximoX) {
 posicion.setPosicionX(posicion.getPosicionX()+sentido.getMultiplicadorX());
 movimientos++;
 chocoFelix();
+	}
 }
 private void chocoFelix() {
 	FelixJr felix=FelixJr.INSTANCE;

@@ -1,4 +1,5 @@
 package juego;
+import java.util.List;
 import edificio.*;
 import ventana.Ventana;
 public class FelixJr {
@@ -19,7 +20,8 @@ private FelixJr() {
 public void resetFelix() {
 	INSTANCE=new FelixJr();
 }
-public void reparar(Edificio edificio){
+public void reparar(){
+	Edificio edificio=Edificio.INSTANCE;
 	edificio.repararVentanaEnPosicion(this.p);
 }
 private void recogerPastel(){
@@ -38,7 +40,8 @@ private void comprobarInmunidad(){
 		}
 	}
 }
-public void mover(Sentido sentido, Edificio edificio,Pajaro[]pajaros) {
+public void mover(Sentido sentido,Pajaro[]pajaros,List<Ladrillo> listaLadrillos) {
+	Edificio edificio=Edificio.INSTANCE;
 	Posicion posicionAacceder=new Posicion(p.getPosicionX()+4*sentido.getMultiplicadorX(),p.getPosicionY()+4*sentido.getMultiplicadorY());
     boolean puedo=false;
     int i;
@@ -47,10 +50,18 @@ public void mover(Sentido sentido, Edificio edificio,Pajaro[]pajaros) {
 		p.setPosicionX(posicionAacceder.getPosicionX());
 		p.setPosicionY(posicionAacceder.getPosicionY());
 	}
-	for(i=0;i<pajaros.length;i++) {
+	if(!inmunidad) {
+	for(i=0;i<pajaros.length && (seccionActual!=1);i++) {
 		 if(pajaros[i].getPosicion().equals(p)) {         //compruebo si hay un pajaro en esa posicion
 			 this.setVida();                        
 		 }
+	}
+	for(i=0;i<listaLadrillos.size();i++) {
+		Ladrillo ladrillo=listaLadrillos.get(i);
+		if(ladrillo.getPosicion().equals(p)) {
+		   this.setVida();
+		}
+	}
 	}
 	recogerPastel();
 	comprobarInmunidad();
@@ -89,7 +100,8 @@ public void setInmunidad(boolean inmunidad) {
 public Posicion getP() {
 	return p;
 }
-public void setP(Posicion p) {
+public void cambiarSeccion(Posicion p) {
 	this.p = p;
+	seccionActual++;
 }
 }

@@ -18,6 +18,9 @@ private Edificio() {
 public void reiniciar(){
 	INSTANCE=new Edificio();
 }
+public boolean seccionCompletada(int nSeccion) {
+		return secciones[nSeccion-1].seccionCompletada();
+}
 public boolean edificioCompletado() {
 	boolean completada=true;
 	int i;
@@ -35,6 +38,9 @@ public void repararVentanaEnPosicion(Posicion posVentanaAreparar) {
 	for(i=0;i<cantSecciones&& (!reparo);i++) {
 	    reparo=secciones[i].repararVentanaEnPosicion(posVentanaAreparar);
 	}
+}
+public Posicion posicionSeccion(int nSeccion) {
+	return secciones[nSeccion-1].getP();
 }
 public boolean puedoPasar(Posicion posicionAacceder,Sentido sentido,int seccionActual){
 	Ventana ventana=null;
