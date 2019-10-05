@@ -5,7 +5,7 @@ public class Edificio {
 	private Seccion secciones[];
 	private final int posicionX=0;
 	private final int cantSecciones=3;
-	public static Edificio INSTANCE=new Edificio();
+	public static Edificio INSTANCE=new Edificio();//a
 private Edificio() {
 	secciones=new Seccion[3];
 	int j=0,nSeccion=0;
